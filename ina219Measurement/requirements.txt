@@ -1,0 +1,4 @@
+# Python requirements for INA219 Data Logger
+pyserial>=3.5
+matplotlib>=3.5.0
+numpy>=1.21.0

@@ -1,0 +1,168 @@
+digraph G {
+    // General graph settings
+    rankdir=BT; // Build from Bottom to Top to match image flow
+    nodesep=1.0;
+    ranksep=1.0;
+    fontname="Arial, Helvetica, sans-serif";
+    splines=false; // Use straight lines like the example
+
+    // Global node settings
+    node [fontname="Arial, Helvetica, sans-serif", fontsize=10, shape=box, style=filled, fillcolor=white, color=black];
+    
+    // Global edge settings
+    edge [fontname="Arial, Helvetica, sans-serif", fontsize=10, labelfontsize=10, arrowhead=normal];
+
+    // ==========================================
+    // Define Nodes
+    // ==========================================
+
+    // Top Level
+    DataClient [label="Data Client", shape=box, style=filled, fillcolor="#d3d3d3", width=2, height=1];
+
+    // Central Level
+    ForwardingNode [label="Forwarding\nNode", shape=circle, style=filled, fillcolor="#90ee90", fixedsize=true, width=1.2];
+
+    // Bottom Level
+    SensorNode [label="Node", shape=circle, style=filled, fillcolor="#90ee90", fixedsize=true, width=1.2];
+
+    // ==========================================
+    // Define Actors / Attackers
+    // ==========================================
+
+    // Top-Left Attacker
+    UnwantedNode [
+        label="", 
+        shape=circle, 
+        style=filled, 
+        fillcolor="#ee9090", 
+        fixedsize=true, 
+        width=1.0, 
+        image="path/to/unwanted_node.png", // ADD LOCAL IMAGE PATH HERE
+        imagescale=true
+    ];
+    UnwantedText [label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+            <TR><TD ALIGN="LEFT"><B>Whitelisting/Blacklisting</B></TD></TR>
+            <TR><TD ALIGN="LEFT">prevents unauthorized</TD></TR>
+            <TR><TD ALIGN="LEFT">devices</TD></TR>
+        </TABLE>
+    >, shape=plaintext, style=""];
+
+    // Mid-Right Attacker (Man-in-the-Middle)
+    MitmAttacker [
+        label="", 
+        shape=circle, 
+        style=filled, 
+        fillcolor="#ee9090", 
+        fixedsize=true, 
+        width=1.0, 
+        image="path/to/attacker.png", // ADD LOCAL IMAGE PATH HERE
+        imagescale=true
+    ];
+    MitmText [label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+            <TR><TD ALIGN="LEFT"><B>Secret session keys</B></TD></TR>
+            <TR><TD ALIGN="LEFT">based on approved RNG,</TD></TR>
+            <TR><TD ALIGN="LEFT">prevent man-in-the-</TD></TR>
+            <TR><TD ALIGN="LEFT">middle attacks</TD></TR>
+        </TABLE>
+    >, shape=plaintext, style=""];
+
+    // Lower-Left Attacker (Replay)
+    ReplayAttacker [
+        label="", 
+        shape=circle, 
+        style=filled, 
+        fillcolor="#ee9090", 
+        fixedsize=true, 
+        width=1.0, 
+        image="path/to/unwanted_node.png", // ADD LOCAL IMAGE PATH HERE
+        imagescale=true
+    ];
+    ReplayText [label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+            <TR><TD ALIGN="LEFT"><B>Security uses nonce,</B></TD></TR>
+            <TR><TD ALIGN="LEFT">so messages can't be</TD></TR>
+            <TR><TD ALIGN="LEFT">replayed</TD></TR>
+        </TABLE>
+    >, shape=plaintext, style=""];
+
+    // Eavesdropper
+    EavesdropperIcon [
+        label="", 
+        shape=plaintext, 
+        style="", 
+        width=0.5, 
+        height=0.5, 
+        image="path/to/eavesdropper.png", // ADD LOCAL IMAGE PATH HERE
+        imagescale=true
+    ];
+    EavesdropperText [label=<
+        <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+            <TR><TD ALIGN="LEFT"><B>Message encrypted end-to-</B></TD></TR>
+            <TR><TD ALIGN="LEFT">end, so can't be understood</TD></TR>
+            <TR><TD ALIGN="LEFT">by eavesdropper</TD></TR>
+        </TABLE>
+    >, shape=plaintext, style=""];
+
+    // ==========================================
+    // Define Message Icons (Requires image files)
+    // ==========================================
+    
+    // Valid Messages
+    MsgValid1 [label="", shape=plaintext, style="", image="path/to/message_check.png"]; // Replace with green check msg image
+    MsgValid2 [label="", shape=plaintext, style="", image="path/to/message_check.png"];
+
+    // Blocked/Invalid Messages
+    MsgBlocked1 [label="", shape=plaintext, style="", image="path/to/message_x.png"]; // Replace with red X msg image
+    MsgBlocked2 [label="", shape=plaintext, style="", image="path/to/message_x.png"];
+    MsgModified  [label="", shape=plaintext, style="", image="path/to/message_modified.png"]; // Red X modified msg
+    MsgCopy      [label="", shape=plaintext, style="", image="path/to/message_copy.png"]; // Red X copy msg
+
+    // ==========================================
+    // Define Invisible Layout Nodes for Positioning
+    // ==========================================
+    // Used to force nodes to align horizontally in specific vertical ranks
+    { rank=same; UnwantedText; MsgBlocked1; }
+    { rank=same; UnwantedNode; ForwardingNode; MitmAttacker; MitmText; }
+    { rank=same; ReplayText; MsgCopy; MsgBlocked2; }
+    { rank=same; ReplayAttacker; SensorNode; }
+    { rank=same; EavesdropperText; EavesdropperIcon; }
+
+    // ==========================================
+    // Define Connections (Edges)
+    // ==========================================
+
+    // Valid Path
+    SensorNode -> MsgValid1 [dir=none];
+    MsgValid1 -> ForwardingNode;
+    ForwardingNode -> MsgValid2 [dir=none];
+    MsgValid2 -> DataClient;
+
+    // Unwanted Node Attack
+    UnwantedText -> UnwantedNode [style=invis]; // Positioning anchor
+    UnwantedNode -> MsgBlocked1 [dir=none];
+    MsgBlocked1 -> DataClient;
+
+    // MITM Attack
+    MitmText -> MitmAttacker [style=invis]; // Positioning anchor
+    SensorNode -> MitmAttacker [style=dashed];
+    MitmAttacker -> MsgModified [dir=none];
+    MsgModified -> DataClient;
+
+    // Replay Attack
+    ReplayText -> ReplayAttacker [style=invis]; // Positioning anchor
+    ReplayAttacker -> MsgCopy [dir=none];
+    MsgCopy -> ForwardingNode;
+
+    // Eavesdropper representation
+    // Using a dashed connection with an arrowhead pointing to the icon
+    SensorNode -> EavesdropperIcon [style=invis]; // Layout anchor
+    EavesdropperText -> EavesdropperIcon [style=invis]; // Layout anchor
+    
+    // The visual connection indicating eavesdropping attempt
+    edge [constraint=false]; // Don't let this line affect ranking
+    SensorNode -> EavesdropperIcon [style=dashed, arrowhead=normal, label=" "];
+    edge [constraint=true]; // Reset edge constraints
+
+}

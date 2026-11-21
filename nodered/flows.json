@@ -1,0 +1,2377 @@
+[
+    {
+        "id": "dd531864605645c8",
+        "type": "tab",
+        "label": "Front End",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b73902e07d3e981b",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": true,
+        "info": ""
+    },
+    {
+        "id": "8954aba470dbd62b",
+        "type": "tab",
+        "label": "Agricultural Backend",
+        "disabled": true,
+        "info": "Backend data storage system for agricultural monitoring"
+    },
+    {
+        "id": "e3364afe1c194650",
+        "type": "tab",
+        "label": "Backend",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "backend_new_tab",
+        "type": "tab",
+        "label": "Agricultural Tani",
+        "disabled": false,
+        "info": "New backend data storage system for agricultural monitoring"
+    },
+    {
+        "id": "f1a2e8c1.6b3e98",
+        "type": "tab",
+        "label": "EnigmaIOT Test Flow",
+        "disabled": true,
+        "info": "Flow to test EnigmaIOT API from Node-RED\n- Set gateway IP using the Set gateway IP inject (stores in flow context)\n- Use inject buttons or the dashboard dropdown\n- HTTP Request node uses msg.method and msg.url (2 outputs) for success/error handling"
+    },
+    {
+        "id": "mqtt_broker",
+        "type": "mqtt-broker",
+        "name": "MQTT",
+        "broker": "192.168.1.20",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "compatmode": false,
+        "protocolVersion": 4,
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "mqtt_broker_main",
+        "type": "mqtt-broker",
+        "name": "Agricultural MQTT",
+        "broker": "192.168.1.20",
+        "port": "1883",
+        "clientid": "agri_dashboard",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthQos": "0",
+        "willQos": "0"
+    },
+    {
+        "id": "mqtt_broker_backend",
+        "type": "mqtt-broker",
+        "name": "Backend MQTT",
+        "broker": "192.168.1.20",
+        "port": "1883",
+        "clientid": "agri_backend",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthQos": "0",
+        "willQos": "0"
+    },
+    {
+        "id": "influxdb_config",
+        "type": "influxdb",
+        "hostname": "localhost",
+        "port": "8086",
+        "protocol": "http",
+        "database": "tani_bucket",
+        "name": "InfluxDB Tani",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "timeout": "",
+        "rejectUnauthorized": false
+    },
+    {
+        "id": "1677e7e588dda866",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "influx2",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://192.168.1.20:8086",
+        "timeout": 10,
+        "rejectUnauthorized": false
+    },
+    {
+        "id": "a83c35b17b1ff770",
+        "type": "ui_tab",
+        "name": "Precision Agriculture IoT System",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "79581ac7fc1929d4",
+        "type": "ui_group",
+        "name": "TaniNet Gateway",
+        "tab": "a83c35b17b1ff770",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "20c75ce1ee640cf3",
+        "type": "ui_group",
+        "name": "Control",
+        "tab": "a83c35b17b1ff770",
+        "order": 2,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ui_group_filter",
+        "type": "ui_group",
+        "name": "Gateway Filter",
+        "tab": "a83c35b17b1ff770",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "ui_group_metrics",
+        "type": "ui_group",
+        "name": "Area Selected",
+        "tab": "a83c35b17b1ff770",
+        "order": 4,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2a09a6320b58e608",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#009425",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#009425",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#009425",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#00e038",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#009425",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "532f186c94a9a11c",
+        "type": "ui_spacer",
+        "z": "dd531864605645c8",
+        "name": "spacer",
+        "group": "ui_group_filter",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "3d3b3518f95e2a1c",
+        "type": "inject",
+        "z": "dd531864605645c8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 180,
+        "wires": [
+            [
+                "667258a65a359786",
+                "63846a0294bfea7f",
+                "b0c8c2a97e757080"
+            ]
+        ]
+    },
+    {
+        "id": "667258a65a359786",
+        "type": "ui_switch",
+        "z": "dd531864605645c8",
+        "name": "",
+        "label": "Water Pump",
+        "tooltip": "",
+        "group": "20c75ce1ee640cf3",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 430,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "22da5691d0673b02",
+        "type": "ui_gauge",
+        "z": "dd531864605645c8",
+        "name": "",
+        "group": "20c75ce1ee640cf3",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Water Flow",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 690,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "63846a0294bfea7f",
+        "type": "ui_slider",
+        "z": "dd531864605645c8",
+        "name": "",
+        "label": "Water Flow Control",
+        "tooltip": "",
+        "group": "20c75ce1ee640cf3",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "className": "",
+        "x": 450,
+        "y": 240,
+        "wires": [
+            [
+                "22da5691d0673b02"
+            ]
+        ]
+    },
+    {
+        "id": "b0c8c2a97e757080",
+        "type": "ui_slider",
+        "z": "dd531864605645c8",
+        "name": "",
+        "label": "Airflow Control",
+        "tooltip": "",
+        "group": "20c75ce1ee640cf3",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "className": "",
+        "x": 440,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "influx_get_gateway",
+        "type": "influxdb in",
+        "z": "dd531864605645c8",
+        "influxdb": "1677e7e588dda866",
+        "name": "Get Node List",
+        "query": "import \"influxdata/influxdb/schema\"\n\nschema.tagValues(\n  bucket: \"tani_bucket\",\n  tag: \"node\"\n)\n",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "5f494332592bb5f9",
+        "x": 260,
+        "y": 360,
+        "wires": [
+            [
+                "fn_gateway_dropdown",
+                "e2bde3053c3d8cc9"
+            ]
+        ]
+    },
+    {
+        "id": "fn_gateway_dropdown",
+        "type": "function",
+        "z": "dd531864605645c8",
+        "name": "Build Node Dropdown",
+        "func": "// msg.payload contoh:\n// [ { result: \"_result\", table: 0, _value: \"noded51edc\" } ]\nmsg.options = msg.payload.map(r => r._value);\n\n// // Kirim options ke dropdown\n// msg.options = options;\n\n// // Auto-select node pertama (optional)\n// msg.payload = options.length ? options[0].value : null;\n\n// Topic HARUS sama dengan variable Flux\nmsg.topic = \"node\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 360,
+        "wires": [
+            [
+                "ui_gateway_select",
+                "4f096404526f6503"
+            ]
+        ]
+    },
+    {
+        "id": "ui_gateway_select",
+        "type": "ui_dropdown",
+        "z": "dd531864605645c8",
+        "name": "Node Selector",
+        "label": "Sensor Node",
+        "tooltip": "",
+        "place": "Select node",
+        "group": "ui_group_filter",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "passthru": true,
+        "multiple": false,
+        "options": [],
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 760,
+        "y": 360,
+        "wires": [
+            [
+                "7c5d8d85223ec8a0",
+                "0f4925ce057e6743"
+            ]
+        ]
+    },
+    {
+        "id": "influx_query_node",
+        "type": "influxdb in",
+        "z": "dd531864605645c8",
+        "influxdb": "1677e7e588dda866",
+        "name": "Query Node Metrics",
+        "query": "",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "5f494332592bb5f9",
+        "x": 500,
+        "y": 500,
+        "wires": [
+            [
+                "4bad133b593f8780",
+                "ab241fb842c0efa9",
+                "4cfee5244a0ddb7c",
+                "8df25b45abdd41cb"
+            ]
+        ]
+    },
+    {
+        "id": "ui_battery",
+        "type": "ui_gauge",
+        "z": "dd531864605645c8",
+        "name": "",
+        "group": "ui_group_metrics",
+        "order": 1,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Battery",
+        "label": "V",
+        "format": "{{payload.battery}}",
+        "min": "2.8",
+        "max": 4.2,
+        "colors": [
+            "#ca3838",
+            "#e6e600",
+            "#00b500"
+        ],
+        "seg1": 3.4,
+        "seg2": 3.7,
+        "diff": false,
+        "className": "",
+        "x": 1060,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "ui_rssi",
+        "type": "ui_gauge",
+        "z": "dd531864605645c8",
+        "name": "",
+        "group": "ui_group_metrics",
+        "order": 2,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "C",
+        "format": "{{payload.temperature|number:1}}",
+        "min": "0",
+        "max": "50",
+        "colors": [
+            "#ca3838",
+            "#e6e600",
+            "#00b500"
+        ],
+        "seg1": "25",
+        "seg2": "37",
+        "diff": false,
+        "className": "",
+        "x": 1070,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "ui_per",
+        "type": "ui_gauge",
+        "z": "dd531864605645c8",
+        "name": "",
+        "group": "ui_group_metrics",
+        "order": 3,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "%",
+        "format": "{{payload.humidity}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "50",
+        "seg2": "80",
+        "diff": false,
+        "className": "",
+        "x": 1060,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "ui_pph",
+        "type": "ui_gauge",
+        "z": "dd531864605645c8",
+        "name": "",
+        "group": "ui_group_metrics",
+        "order": 4,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Lumonisity",
+        "label": "",
+        "format": "{{payload.luminosity}}",
+        "min": 0,
+        "max": 500,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1070,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "e2bde3053c3d8cc9",
+        "type": "debug",
+        "z": "dd531864605645c8",
+        "name": "get nodes",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f8d9ea995a3d8b5d",
+        "type": "ui_button",
+        "z": "dd531864605645c8",
+        "name": "",
+        "group": "ui_group_filter",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "List Nodes",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 110,
+        "y": 260,
+        "wires": [
+            [
+                "influx_get_gateway"
+            ]
+        ]
+    },
+    {
+        "id": "4f096404526f6503",
+        "type": "debug",
+        "z": "dd531864605645c8",
+        "name": "gateway output dropdown",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "options",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "7c5d8d85223ec8a0",
+        "type": "debug",
+        "z": "dd531864605645c8",
+        "name": "node selector",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 980,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "4bad133b593f8780",
+        "type": "debug",
+        "z": "dd531864605645c8",
+        "name": "Query return",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "0f4925ce057e6743",
+        "type": "function",
+        "z": "dd531864605645c8",
+        "name": "Generate query",
+        "func": "\nlet nodeName = msg.payload;\n\nmsg.query = `\nfrom(bucket: \"tani_bucket\")\n  |> range(start: -24h)\n  |> filter(fn: (r) => r._measurement == \"sensordata\")\n  |> filter(fn: (r) => r.node == \"${nodeName}\")\n  |> filter(fn: (r) =>\n      r._field == \"voltage\" or\n      r._field == \"temperature\" or\n      r._field == \"power\" or\n      r._field == \"luminosity\" or\n      r._field == \"humidity\" or\n      r._field == \"analog_in\"\n  )\n  |> aggregateWindow(every: 5m, fn: mean, createEmpty: false)\n`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 500,
+        "wires": [
+            [
+                "influx_query_node"
+            ]
+        ]
+    },
+    {
+        "id": "ab241fb842c0efa9",
+        "type": "function",
+        "z": "dd531864605645c8",
+        "name": "payload latest",
+        "func": "let latest = {};\n\nmsg.payload.forEach(r => {\n    latest[r._field] = r._value;\n});\n\nmsg.payload = latest;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 500,
+        "wires": [
+            [
+                "a63e4bd59af17198",
+                "ui_rssi",
+                "ui_per",
+                "ui_battery",
+                "ui_pph"
+            ]
+        ]
+    },
+    {
+        "id": "a63e4bd59af17198",
+        "type": "debug",
+        "z": "dd531864605645c8",
+        "name": "payload latest",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "1179c38a7e0109cb",
+        "type": "ui_chart",
+        "z": "dd531864605645c8",
+        "name": "",
+        "group": "ui_group_metrics",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "label": "Temperature",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "50",
+        "removeOlder": "24",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1070,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4cfee5244a0ddb7c",
+        "type": "function",
+        "z": "dd531864605645c8",
+        "name": "Temperature only",
+        "func": "// msg.payload = array hasil query InfluxDB\n\nlet filtered = msg.payload.filter(p => p._field === \"temperature\");\n\nlet out = filtered.map(p => ({\n    x: new Date(p._time),   // time axis\n    y: p._value             // temperature value\n}));\n\nmsg.payload = [{\n    series: [\"Temperature\"],\n    data: [out],\n    labels: []\n}];\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 620,
+        "wires": [
+            [
+                "1179c38a7e0109cb",
+                "dc7322421e0c6eba"
+            ]
+        ]
+    },
+    {
+        "id": "dc7322421e0c6eba",
+        "type": "debug",
+        "z": "dd531864605645c8",
+        "name": "Temp",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "8df25b45abdd41cb",
+        "type": "function",
+        "z": "dd531864605645c8",
+        "name": "Humidity only",
+        "func": "// msg.payload = array hasil query InfluxDB\n\nlet filtered = msg.payload.filter(p => p._field === \"humidity\");\n\nlet out = filtered.map(p => ({\n    x: new Date(p._time),   // time axis\n    y: p._value             // temperature value\n}));\n\nmsg.payload = [{\n    series: [\"Humidity\"],\n    data: [out],\n    labels: []\n}];\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 740,
+        "wires": [
+            [
+                "391ae5a32b19fa38"
+            ]
+        ]
+    },
+    {
+        "id": "391ae5a32b19fa38",
+        "type": "ui_chart",
+        "z": "dd531864605645c8",
+        "name": "",
+        "group": "ui_group_metrics",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "label": "Humidity",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "24",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1060,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0f3de2896343ecd5",
+        "type": "comment",
+        "z": "dd531864605645c8",
+        "name": "Frontend",
+        "info": "",
+        "x": 100,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "5810a19f748f48db",
+        "type": "mqtt in",
+        "z": "b73902e07d3e981b",
+        "name": "",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 450,
+        "y": 180,
+        "wires": [
+            [
+                "656129592676b1c8"
+            ]
+        ]
+    },
+    {
+        "id": "656129592676b1c8",
+        "type": "debug",
+        "z": "b73902e07d3e981b",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "e3328d789f545dc0",
+        "type": "function",
+        "z": "b73902e07d3e981b",
+        "name": "Extract Values",
+        "func": "let data = msg.payload;\nif (typeof data === \"string\") {\n    data = JSON.parse(data);\n}\n\nlet result = {};\ndata.forEach(item => {\n    result[item.name] = item.value;\n});\nmsg.payload = result\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 360,
+        "wires": [
+            [
+                "aca30a5b774dc734",
+                "b6abaa2122f60961",
+                "5f362dada9287693",
+                "1dd41c31d68632bf"
+            ]
+        ]
+    },
+    {
+        "id": "aca30a5b774dc734",
+        "type": "ui_gauge",
+        "z": "b73902e07d3e981b",
+        "name": "Temperature",
+        "group": "",
+        "order": 3,
+        "width": 6,
+        "height": 6,
+        "gtype": "gage",
+        "title": "Temperature (°C)",
+        "label": "°C",
+        "format": "{{msg.payload.temperature}}",
+        "min": -20,
+        "max": 50,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1220,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "b6abaa2122f60961",
+        "type": "ui_gauge",
+        "z": "b73902e07d3e981b",
+        "name": "Pressure",
+        "group": "",
+        "order": 1,
+        "width": 6,
+        "height": 6,
+        "gtype": "gage",
+        "title": "Pressure (hPa)",
+        "label": "hPa",
+        "format": "{{msg.payload.pressure}}",
+        "min": 800,
+        "max": 1100,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1220,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "5f362dada9287693",
+        "type": "ui_gauge",
+        "z": "b73902e07d3e981b",
+        "name": "Current",
+        "group": "",
+        "order": 2,
+        "width": 6,
+        "height": 6,
+        "gtype": "gage",
+        "title": "Current (A)",
+        "label": "A",
+        "format": "{{msg.payload.current}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1220,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "9d8a959c290f9a7d",
+        "type": "mqtt in",
+        "z": "b73902e07d3e981b",
+        "name": "",
+        "topic": "TaniNet/Taninode1/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 440,
+        "y": 360,
+        "wires": [
+            [
+                "e3328d789f545dc0"
+            ]
+        ]
+    },
+    {
+        "id": "1dd41c31d68632bf",
+        "type": "debug",
+        "z": "b73902e07d3e981b",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "99a38e9370551d91",
+        "type": "ui_ui_control",
+        "z": "b73902e07d3e981b",
+        "name": "",
+        "events": "all",
+        "x": 440,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4720dc4226a2e7bb",
+        "type": "mqtt in",
+        "z": "8954aba470dbd62b",
+        "name": "Collect All Sensor Data",
+        "topic": "+/+/data",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "mqtt_broker_backend",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 200,
+        "y": 200,
+        "wires": [
+            [
+                "e8dd71c588fc88bc",
+                "b449a78ce0b3b9e9"
+            ]
+        ]
+    },
+    {
+        "id": "e8dd71c588fc88bc",
+        "type": "function",
+        "z": "8954aba470dbd62b",
+        "name": "Parse Sensor Data",
+        "func": "// Extract network and node from topic\nlet topicParts = msg.topic.split('/');\nlet network = topicParts[0];\nlet nodeName = topicParts[1];\n\n// Parse payload if it's a string\nlet payload = msg.payload;\nif (typeof payload === 'string') {\n    try {\n        payload = JSON.parse(payload);\n    } catch (e) {\n        node.warn('Failed to parse JSON payload');\n        return null;\n    }\n}\n\n// Handle array of sensor data\nif (Array.isArray(payload)) {\n    let messages = [];\n    \n    payload.forEach(sensor => {\n        let sensorMsg = {\n            topic: msg.topic,\n            payload: {\n                fields: {\n                    value: sensor.value,\n                    temperature: sensor.name === 'temperature' ? sensor.value : null,\n                    humidity: sensor.name === 'humidity' ? sensor.value : null,\n                    analog_in: sensor.name === 'analog_in' ? sensor.value : null,\n                    luminosity: sensor.name === 'luminosity' ? sensor.value : null,\n                    ph: sensor.name === 'ph' ? sensor.value : null,\n                    power: sensor.name === 'power' ? sensor.value : null,\n                    voltage: sensor.name === 'voltage' ? sensor.value : null\n                },\n                tags: {\n                    gateway: network,\n                    node: nodeName,\n                    channel: sensor.channel,\n                    type: sensor.type,\n                    name: sensor.name,\n                    timestamp: new Date()\n                },\n            }\n        };\n        messages.push(sensorMsg);\n    });\n    \n    return [messages];\n} else {\n    // Handle single object (backward compatibility)\n    msg.payload = {\n        measurement: 'sensor_data',\n        fields: payload,\n        tags: {\n            gateway: network,\n            node: nodeName\n        },\n        timestamp: new Date()\n    };\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 200,
+        "wires": [
+            [
+                "3d01312f783a0993"
+            ]
+        ]
+    },
+    {
+        "id": "b2f2cd33b98586bf",
+        "type": "mqtt in",
+        "z": "8954aba470dbd62b",
+        "name": "Collect Command Data",
+        "topic": "+/+/set/data",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "mqtt_broker_backend",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 200,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "23997875d9dc5ad4",
+        "type": "function",
+        "z": "8954aba470dbd62b",
+        "name": "Parse Command Data",
+        "func": "// Extract network and node from topic\nlet topicParts = msg.topic.split('/');\nlet network = topicParts[0];\nlet nodeName = topicParts[1];\n\n// Parse payload if it's a string\nlet payload = msg.payload;\nif (typeof payload === 'string') {\n    try {\n        payload = JSON.parse(payload);\n    } catch (e) {\n        node.warn('Failed to parse JSON payload');\n        return null;\n    }\n}\n\n// Format for InfluxDB\nmsg.payload = {\n    measurement: 'command_logs',\n    fields: {\n        cmd: payload.cmd,\n        rly: payload.rly,\n        link: payload.link,\n        bstate: payload.bstate\n    },\n    tags: {\n        gateway: network,\n        node: nodeName,\n        type: 'command'\n    },\n    timestamp: new Date()\n};\nreturn msg;",
+        "outputs": 1,
+        "x": 450,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "27b3cad6cfcc382d",
+        "type": "mqtt in",
+        "z": "8954aba470dbd62b",
+        "name": "Collect Status Data",
+        "topic": "+/+/status",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "mqtt_broker_backend",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 200,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7c3de18d24f29eda",
+        "type": "function",
+        "z": "8954aba470dbd62b",
+        "name": "Parse Status Data",
+        "func": "// Extract network and node from topic\nlet topicParts = msg.topic.split('/');\nlet network = topicParts[0];\nlet nodeName = topicParts[1];\n\n// Parse payload if it's a string\nlet payload = msg.payload;\nif (typeof payload === 'string') {\n    try {\n        payload = JSON.parse(payload);\n    } catch (e) {\n        node.warn('Failed to parse JSON payload');\n        return null;\n    }\n}\n\n// Format for InfluxDB\nmsg.payload = {\n    measurement: 'device_status',\n    fields: {\n        status: payload.status,\n        battery: payload.battery,\n        rssi: payload.rssi,\n        uptime: payload.uptime\n    },\n    tags: {\n        gateway: network,\n        node: nodeName,\n        type: 'status'\n    },\n    timestamp: new Date()\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b449a78ce0b3b9e9",
+        "type": "debug",
+        "z": "8954aba470dbd62b",
+        "name": "Data Logger",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 450,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "aa65da9d08054188",
+        "type": "influxdb out",
+        "z": "8954aba470dbd62b",
+        "influxdb": "influxdb_config",
+        "name": "Store Sensor Data",
+        "measurement": "sensor_readings",
+        "precision": "ms",
+        "retentionPolicy": "",
+        "database": "tani_bucket",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "tani",
+        "bucket": "tani_bucket",
+        "x": 850,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "7ad06452c3d3834f",
+        "type": "influxdb out",
+        "z": "8954aba470dbd62b",
+        "influxdb": "influxdb_config",
+        "name": "Store Command Data",
+        "measurement": "command_logs",
+        "precision": "ms",
+        "retentionPolicy": "",
+        "database": "tani_bucket",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "",
+        "bucket": "",
+        "x": 700,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "8a162b4063546f31",
+        "type": "influxdb out",
+        "z": "8954aba470dbd62b",
+        "influxdb": "influxdb_config",
+        "name": "Store Status Data",
+        "measurement": "device_status",
+        "precision": "ms",
+        "retentionPolicy": "",
+        "database": "tani_bucket",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "",
+        "bucket": "",
+        "x": 700,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "3d01312f783a0993",
+        "type": "debug",
+        "z": "8954aba470dbd62b",
+        "name": "Command db",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "b7f3ac3e2a5a01b8",
+        "type": "change",
+        "z": "8954aba470dbd62b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7ec53e9b19baadfb",
+        "type": "function",
+        "z": "e3364afe1c194650",
+        "name": "Extract Values",
+        "func": "let data = msg.payload;\nif (typeof data === \"string\") {\n    data = JSON.parse(data);\n}\n\nlet result = {};\ndata.forEach(item => {\n    result[item.name] = item.value;\n});\nmsg.payload = result\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 200,
+        "wires": [
+            [
+                "8d2f2438a68f6486"
+            ]
+        ]
+    },
+    {
+        "id": "482fc6c5b8bd71e1",
+        "type": "mqtt in",
+        "z": "e3364afe1c194650",
+        "d": true,
+        "name": "",
+        "topic": "+/+/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 180,
+        "wires": [
+            [
+                "7ec53e9b19baadfb",
+                "545c441ef1249f4d"
+            ]
+        ]
+    },
+    {
+        "id": "545c441ef1249f4d",
+        "type": "debug",
+        "z": "e3364afe1c194650",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "8d2f2438a68f6486",
+        "type": "debug",
+        "z": "e3364afe1c194650",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "6421c888f0482bc6",
+        "type": "change",
+        "z": "e3364afe1c194650",
+        "name": "Formatting",
+        "rules": [
+            {
+                "t": "set",
+                "p": "fields.temperature",
+                "pt": "msg",
+                "to": "30",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "fields.humidity",
+                "pt": "msg",
+                "to": "30",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "tags.node",
+                "pt": "msg",
+                "to": "nodename",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "tags.gateway",
+                "pt": "msg",
+                "to": "gatewayname",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "tags.timestamp",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$append(fields,tags)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 660,
+        "wires": [
+            [
+                "8d2f2438a68f6486",
+                "78ee49e03213ca20"
+            ]
+        ]
+    },
+    {
+        "id": "eac807a5daf6d072",
+        "type": "inject",
+        "z": "e3364afe1c194650",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 340,
+        "y": 700,
+        "wires": [
+            [
+                "6421c888f0482bc6"
+            ]
+        ]
+    },
+    {
+        "id": "78ee49e03213ca20",
+        "type": "influxdb out",
+        "z": "e3364afe1c194650",
+        "influxdb": "1677e7e588dda866",
+        "name": "SendInflux",
+        "measurement": "sensordata",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "tani",
+        "bucket": "iotbucket",
+        "x": 950,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "mqtt_sensor_collector",
+        "type": "mqtt in",
+        "z": "backend_new_tab",
+        "name": "Collect Sensor Data",
+        "topic": "+/+/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "mqtt_broker_main",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 210,
+        "y": 200,
+        "wires": [
+            [
+                "reformat_sensor_data",
+                "8c223173947cf941"
+            ]
+        ]
+    },
+    {
+        "id": "reformat_sensor_data",
+        "type": "function",
+        "z": "backend_new_tab",
+        "name": "Reformat Sensor Data",
+        "func": "// Input (msg.payload): [\n//   {\"channel\":1,\"type\":2,\"name\":\"analog_in\",\"value\":56},\n//   {\"channel\":2,\"type\":103,\"name\":\"temperature\",\"value\":25.29999924},\n//   ...\n// ]\n// Output (msg.payload): [{\n//   measurement: \"sensor\",\n//   fields: { temperature: 25.29999924, humidity: 60.5, ... }\n// }]\nlet topicParts = msg.topic.split('/'); \nlet gateway = topicParts[0]; \nlet nodeName = topicParts[1];\n\nfunction coerceNumber(v) {\n    const n = Number(v);\n    return Number.isFinite(n) ? n : v; // keep as-is if not numeric\n}\n\nconst arr = Array.isArray(msg.payload) ? msg.payload : [];\nif (!arr.length) return null;\n\nconst fields = {};\nconst used = new Set();\n\nfor (const it of arr) {\n    if (!it || it.name == null) continue;\n    let key = String(it.name);\n\n    // De-duplicate field names\n    if (used.has(key)) {\n        if (it.channel != null) key = `${key}_${it.channel}`;\n        let i = 2;\n        while (used.has(key)) {\n            key = `${it.name}_${i++}`;\n        }\n    }\n    used.add(key);\n\n    fields[key] = coerceNumber(it.value);\n}\n\n// Nothing to write?\nif (Object.keys(fields).length === 0) return null;\n\nlet tags = {\n    node: nodeName,\n    gateway: gateway,\n //   timestamp: Date.now()\n};\n\n// let measurement = { measurement: nodeName };\n\n// Create final format\nmsg.payload = [fields,tags];\nreturn msg\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 200,
+        "wires": [
+            [
+                "store_to_influx",
+                "debug_output"
+            ]
+        ]
+    },
+    {
+        "id": "store_to_influx",
+        "type": "influxdb out",
+        "z": "backend_new_tab",
+        "influxdb": "1677e7e588dda866",
+        "name": "Store to InfluxDB",
+        "measurement": "sensordata",
+        "precision": "ms",
+        "retentionPolicy": "",
+        "database": "",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "5f494332592bb5f9",
+        "bucket": "tani_bucket",
+        "x": 730,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "debug_output",
+        "type": "debug",
+        "z": "backend_new_tab",
+        "name": "Debug Data Parsing",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "17dcc20fed2ffb4c",
+        "type": "mqtt in",
+        "z": "backend_new_tab",
+        "name": "Collect Status Data",
+        "topic": "+/+/status",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "mqtt_broker_main",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 210,
+        "y": 320,
+        "wires": [
+            [
+                "51eac0de99c9779f",
+                "a9819fda61594280"
+            ]
+        ]
+    },
+    {
+        "id": "51eac0de99c9779f",
+        "type": "function",
+        "z": "backend_new_tab",
+        "name": "Parse Status Data",
+        "func": "// Extract network and node from topic\nlet topicParts = msg.topic.split('/');\nlet network = topicParts[0];\nlet nodeName = topicParts[1];\n\nfunction num(value) {\n    const n = Number(value);\n    return isNaN(n) ? undefined : n;\n}\n\n// Format for InfluxDB\nlet payload = msg.payload;\nif (typeof payload === 'string') {\n    try {\n        payload = JSON.parse(payload);\n    } catch (e) {\n        node.warn('Failed to parse JSON payload');\n        return null;\n    }\n}\n\n// Initialize sensor data object\nlet fields = {\n    status: num(payload.status),\n    battery: num(payload.battery),\n    rssi: num(payload.rssi),\n    per: num(payload.per),\n    lostmessages: num(payload.lostmessages),\n    totalmessages: num(payload.totalmessages),\n    packetshour: num(payload.packetshour)\n};\n\nlet tags = {\n    node: nodeName,\n    gateway: network\n //   timestamp: Date.now()\n};\n\n// let measurement = { measurement: nodeName };\n\n// Create final format\nmsg.payload = [fields,tags];\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 320,
+        "wires": [
+            [
+                "7ace5d1a0771d848",
+                "494e42625ef18dee"
+            ]
+        ]
+    },
+    {
+        "id": "7ace5d1a0771d848",
+        "type": "influxdb out",
+        "z": "backend_new_tab",
+        "influxdb": "1677e7e588dda866",
+        "name": "Store status to InfluxDB",
+        "measurement": "nodestatus",
+        "precision": "ms",
+        "retentionPolicy": "",
+        "database": "",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "5f494332592bb5f9",
+        "bucket": "Status",
+        "x": 750,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "494e42625ef18dee",
+        "type": "debug",
+        "z": "backend_new_tab",
+        "name": "Debug Status Parsing",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "a9819fda61594280",
+        "type": "debug",
+        "z": "backend_new_tab",
+        "name": "MQTT Status",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 450,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "8c223173947cf941",
+        "type": "debug",
+        "z": "backend_new_tab",
+        "name": "MQTT Data",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 450,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "6bf73a8501331921",
+        "type": "mqtt in",
+        "z": "backend_new_tab",
+        "name": "Collect Status Data",
+        "topic": "+/gateway/status",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "mqtt_broker_main",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 210,
+        "y": 440,
+        "wires": [
+            [
+                "d521ba74803a9e58",
+                "e6933d2eff55d72e"
+            ]
+        ]
+    },
+    {
+        "id": "d521ba74803a9e58",
+        "type": "function",
+        "z": "backend_new_tab",
+        "name": "Parse Status Data",
+        "func": "// Extract network and node from topic\nlet topicParts = msg.topic.split('/');\nlet network = topicParts[0];\nlet nodeName = topicParts[1];\n\nfunction num(value) {\n    const n = Number(value);\n    return isNaN(n) ? undefined : n;\n}\n\n// Format for InfluxDB\nlet payload = msg.payload;\nif (typeof payload === 'string') {\n    try {\n        payload = JSON.parse(payload);\n    } catch (e) {\n        node.warn('Failed to parse JSON payload');\n        return null;\n    }\n}\n\n// Initialize gateway data object\nlet fields = {\n    temp: num(payload.temp),\n    humidity: num(payload.humidity),\n    nodes: num(payload.nodes),\n    mem: num(payload.mem),\n    uptime: num(payload.uptime),\n    wifi_channel: num(payload.wifi_channel),\n    wifi_rssi: num(payload.wifi_rssi),\n    wifi_ssid: payload.wifi_ssid,\n    ip: payload.ip,\n    network: payload.network\n};\n\nlet tags = {\n    node: nodeName,\n    gateway: network\n //   timestamp: Date.now()\n};\n\n// let measurement = { measurement: nodeName };\n\n// Create final format\nmsg.payload = [fields,tags];\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 440,
+        "wires": [
+            [
+                "84e28863a607c9a5",
+                "f009e9e27b0e6db1",
+                "7bd711bb7cad07b7"
+            ]
+        ]
+    },
+    {
+        "id": "84e28863a607c9a5",
+        "type": "influxdb out",
+        "z": "backend_new_tab",
+        "influxdb": "1677e7e588dda866",
+        "name": "Store gateway status to InfluxDB",
+        "measurement": "gatewaystatus",
+        "precision": "ms",
+        "retentionPolicy": "",
+        "database": "",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "5f494332592bb5f9",
+        "bucket": "Status",
+        "x": 770,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f009e9e27b0e6db1",
+        "type": "debug",
+        "z": "backend_new_tab",
+        "name": "Debug Status Parsing gateway",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "e6933d2eff55d72e",
+        "type": "debug",
+        "z": "backend_new_tab",
+        "name": "MQTT Status gateway",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "61e9ccbba92b439a",
+        "type": "comment",
+        "z": "backend_new_tab",
+        "name": "Backend",
+        "info": "",
+        "x": 100,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "a0e1730daee5de22",
+        "type": "ui_text",
+        "z": "backend_new_tab",
+        "group": "79581ac7fc1929d4",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Memory",
+        "format": "{{msg.payload.mem}} / 263476 bytes",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 720,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "7bd711bb7cad07b7",
+        "type": "function",
+        "z": "backend_new_tab",
+        "name": "Parsing for dashboard",
+        "func": "// Ambil data utama (index 0)\nlet d = msg.payload[0];\n\n// Siapkan output untuk dashboard\nmsg.payload = {\n    temp: d.temp,\n    humidity: d.humidity,\n    nodes: d.nodes,\n    mem: d.mem,\n    uptime: d.uptime,\n    wifi_rssi: d.wifi_rssi,\n    wifi_ssid: d.wifi_ssid,\n    ip: d.ip,\n    network: d.network\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 620,
+        "wires": [
+            [
+                "a0e1730daee5de22",
+                "6a193df7edf40683",
+                "431dc667ad6d1e23",
+                "83eb7754e1148204",
+                "57d8e1c64dc3151d",
+                "8bc6c919c503f0ef"
+            ]
+        ]
+    },
+    {
+        "id": "6a193df7edf40683",
+        "type": "ui_text",
+        "z": "backend_new_tab",
+        "group": "79581ac7fc1929d4",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "SSID",
+        "format": "{{msg.payload.wifi_ssid}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 710,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "431dc667ad6d1e23",
+        "type": "ui_text",
+        "z": "backend_new_tab",
+        "group": "79581ac7fc1929d4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Active Nodes",
+        "format": "{{msg.payload.nodes}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 730,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "83eb7754e1148204",
+        "type": "ui_gauge",
+        "z": "backend_new_tab",
+        "name": "",
+        "group": "79581ac7fc1929d4",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature Gateway",
+        "label": "Celcius",
+        "format": "{{msg.payload.temp|number:1}} °C",
+        "min": "10",
+        "max": "40",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 900,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "57d8e1c64dc3151d",
+        "type": "ui_gauge",
+        "z": "backend_new_tab",
+        "name": "",
+        "group": "79581ac7fc1929d4",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity (Gateway)",
+        "label": "Hum",
+        "format": "{{msg.payload.humidity}} %",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 890,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "8bc6c919c503f0ef",
+        "type": "function",
+        "z": "backend_new_tab",
+        "name": "uptime function",
+        "func": "let s = msg.payload.uptime;\nlet h = Math.floor(s / 3600);\nlet m = Math.floor((s % 3600) / 60);\nmsg.payload = h + \" h \" + m + \" m\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 740,
+        "wires": [
+            [
+                "2d22f7d692efffac"
+            ]
+        ]
+    },
+    {
+        "id": "2d22f7d692efffac",
+        "type": "ui_text",
+        "z": "backend_new_tab",
+        "group": "79581ac7fc1929d4",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Uptime",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 720,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "set-gw-inject",
+        "type": "inject",
+        "z": "f1a2e8c1.6b3e98",
+        "name": "Set gateway IP",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "192.168.1.100",
+        "payloadType": "str",
+        "x": 160,
+        "y": 80,
+        "wires": [
+            [
+                "set-gw-change"
+            ]
+        ],
+        "info": "Change this IP before clicking or edit the Inject node payload."
+    },
+    {
+        "id": "set-gw-change",
+        "type": "change",
+        "z": "f1a2e8c1.6b3e98",
+        "name": "store as flow.gatewayIP",
+        "rules": [
+            {
+                "t": "set",
+                "p": "gatewayIP",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 80,
+        "wires": [
+            [
+                "dbg-gw"
+            ]
+        ]
+    },
+    {
+        "id": "dbg-gw",
+        "type": "debug",
+        "z": "f1a2e8c1.6b3e98",
+        "name": "Debug: gatewayIP stored",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "flow.gatewayIP",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "inject-gw-info",
+        "type": "inject",
+        "z": "f1a2e8c1.6b3e98",
+        "name": "Get Gateway Info",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "gw_info",
+        "payloadType": "str",
+        "x": 160,
+        "y": 150,
+        "wires": [
+            [
+                "fn-build-request"
+            ]
+        ],
+        "info": "Safe GET"
+    },
+    {
+        "id": "inject-list-nodes",
+        "type": "inject",
+        "z": "f1a2e8c1.6b3e98",
+        "name": "List All Nodes",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "list_nodes",
+        "payloadType": "str",
+        "x": 160,
+        "y": 210,
+        "wires": [
+            [
+                "fn-build-request"
+            ]
+        ],
+        "info": "Safe GET"
+    },
+    {
+        "id": "inject-node-info",
+        "type": "inject",
+        "z": "f1a2e8c1.6b3e98",
+        "name": "Get Specific Node Info",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "node_info",
+        "payloadType": "str",
+        "x": 170,
+        "y": 270,
+        "wires": [
+            [
+                "fn-build-request"
+            ]
+        ],
+        "info": "Edit the node name inside the function node or pass via msg.nodeName"
+    },
+    {
+        "id": "inject-restart-node",
+        "type": "inject",
+        "z": "f1a2e8c1.6b3e98",
+        "name": "Restart Node",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "restart_node",
+        "payloadType": "str",
+        "x": 160,
+        "y": 330,
+        "wires": [
+            [
+                "fn-build-request"
+            ]
+        ],
+        "info": "PUT request"
+    },
+    {
+        "id": "inject-delete-node",
+        "type": "inject",
+        "z": "f1a2e8c1.6b3e98",
+        "name": "Delete/Unregister Node",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "delete_node",
+        "payloadType": "str",
+        "x": 170,
+        "y": 390,
+        "wires": [
+            [
+                "fn-build-request"
+            ]
+        ],
+        "info": "DELETE request"
+    },
+    {
+        "id": "inject-restart-gw",
+        "type": "inject",
+        "z": "f1a2e8c1.6b3e98",
+        "name": "Restart Gateway (confirm)",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "restart_gw",
+        "payloadType": "str",
+        "x": 170,
+        "y": 450,
+        "wires": [
+            [
+                "fn-build-request"
+            ]
+        ],
+        "info": "PUT request with confirm=1"
+    },
+    {
+        "id": "fn-build-request",
+        "type": "function",
+        "z": "f1a2e8c1.6b3e98",
+        "name": "Build Request",
+        "func": "// Reads command from msg.payload (string)\n// Reads gateway IP from flow.gatewayIP (set by Set gateway IP inject)\n// You can also set msg.nodeName or msg.nodeId before calling this node.\n\nvar cmd = msg.payload || \"\";\nvar gw = flow.get('gatewayIP') || \"<gateway-ip>\"; // fallback placeholder\n\nswitch(cmd) {\n    case 'gw_info':\n        msg.url = `http://${gw}/api/gw/info`;\n        msg.method = 'GET';\n        break;\n    case 'list_nodes':\n        msg.url = `http://${gw}/api/gw/nodes`;\n        msg.method = 'GET';\n        break;\n    case 'node_info':\n        // try msg.nodeName, otherwise default to 'MyNode'\n        var nodeName = msg.nodeName || 'MyNode';\n        msg.url = `http://${gw}/api/node/node?nodename=${encodeURIComponent(nodeName)}`;\n        msg.method = 'GET';\n        break;\n    case 'restart_node':\n        var nodeName = msg.nodeName || 'MyNode';\n        msg.url = `http://${gw}/api/node/restart?nodename=${encodeURIComponent(nodeName)}`;\n        msg.method = 'PUT';\n        break;\n    case 'delete_node':\n        // can use nodeid or nodename; here using nodeid\n        var nodeId = msg.nodeId || '5';\n        msg.url = `http://${gw}/api/node/node?nodeid=${encodeURIComponent(nodeId)}`;\n        msg.method = 'DELETE';\n        break;\n    case 'restart_gw':\n        msg.url = `http://${gw}/api/gw/restart?confirm=1`;\n        msg.method = 'PUT';\n        break;\n    default:\n        node.warn('Unknown command: ' + cmd);\n        msg = {payload: {error: 'unknown command'}};\n        return [null];\n}\n\n// Ensure HTTP Request node uses msg.method and msg.url\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 430,
+        "y": 270,
+        "wires": [
+            [
+                "http-request"
+            ]
+        ],
+        "info": "Function builds msg.url and msg.method. Modify to add headers or body if needed."
+    },
+    {
+        "id": "http-request",
+        "type": "http request",
+        "z": "f1a2e8c1.6b3e98",
+        "name": "EnigmaIOT HTTP",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 690,
+        "y": 270,
+        "wires": [
+            [
+                "fn-format-success"
+            ]
+        ]
+    },
+    {
+        "id": "fn-format-success",
+        "type": "function",
+        "z": "f1a2e8c1.6b3e98",
+        "name": "Format Success",
+        "func": "// msg.payload is the parsed JSON response (because HTTP node returns obj)\n// Add some metadata for debugging and dashboard\nvar out = {\n    status: 'ok',\n    request: { method: msg.req ? msg.req.method : msg.method, url: msg.req ? msg.req.path : msg.url },\n    response: msg.payload\n};\nmsg.payload = out;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 940,
+        "y": 280,
+        "wires": [
+            [
+                "debug-success"
+            ]
+        ],
+        "info": "Sends success to Debug and Dashboard text node"
+    },
+    {
+        "id": "debug-success",
+        "type": "debug",
+        "z": "f1a2e8c1.6b3e98",
+        "name": "Debug: Success",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1200,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "debug-error",
+        "type": "debug",
+        "z": "f1a2e8c1.6b3e98",
+        "name": "Debug: Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1190,
+        "y": 300,
+        "wires": []
+    }
+]
